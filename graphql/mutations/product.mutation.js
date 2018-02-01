@@ -1,6 +1,8 @@
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNonNull, GraphQLList } = require('graphql')
 const { productSchema } = require('../types/product')
-const { Product } = require('../../db/models/product')
+const db = require('../../db')
+const { Product } = db.models
+
 
 const productMutation = {
     type: productSchema,
@@ -16,9 +18,9 @@ const productMutation = {
         }
     },
     resolve: async (obj, args, context) => {
-        const product = await Product
+        const prod = await Product
             .create({ description: args.description, quantity: args.quantity })
-        return product
+        return prod
     }
 }
 

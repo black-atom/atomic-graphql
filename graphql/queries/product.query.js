@@ -1,6 +1,6 @@
 const { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLNonNull, GraphQLList } = require('graphql')
 const { productSchema } = require('../types/product')
-const { Product } = require('../../db/models/product')
+const { Product } = require('../../db').models
 
 const productQuery = {
     type: productSchema,
