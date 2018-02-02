@@ -26,7 +26,6 @@ modelInstances.forEach(modelInstance => modelInstance.associate(db.models));
 db.authenticate()
   .then(() => {
     console.log('Successfully connected to the database!');
-    return db.sync({ force: true });
   })
   .then(() => {
     console.log('Successfully synced schemas!');
