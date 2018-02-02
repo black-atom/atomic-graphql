@@ -9,8 +9,6 @@ const {
   testeUser,
 } = require('./config/auth.config')();
 
-
-const PORT = 3000;
 const app = express();
 
 app.use(jwt({
@@ -19,6 +17,7 @@ app.use(jwt({
 }));
 
 app.use((req, res, next) => {
+  req.user = req.user || {};
   req.user = (req.user._doc !== undefined) ? // eslint-disable-line no-underscore-dangle
     req.user._doc : testeUser; // eslint-disable-line no-underscore-dangle
 
@@ -27,8 +26,4 @@ app.use((req, res, next) => {
 
 app.use('/graphql', graphqlHTTP({ schema, pretty: true, graphiql: true }));
 
-app.listen(PORT, () => console.log('Running ...'));
-
-module.exports = {
-  app,
-};
+module.exports = app;
